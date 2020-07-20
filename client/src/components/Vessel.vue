@@ -82,7 +82,7 @@ export default {
 		}
 	},
 	components: {
-		Mode
+        Mode
 	}
 }
 </script>

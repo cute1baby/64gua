@@ -1,0 +1,27 @@
+name: Hourly Coze Workflow Trigger
+
+# 配置触发条件
+on:
+  schedule:
+    # GitHub Actions 标准 Cron 格式（分 时 天 月 周）
+    # 每小时的第 0 分钟执行一次（注意：GitHub 定时任务基于 UTC 时间）
+    - cron: '0 * * * *'
+  # 允许你在 GitHub 页面上手动点击按钮触发，方便测试
+  workflow_dispatch:
+
+jobs:
+  trigger_coze:
+    name: Trigger Coze Webhook
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send Webhook Request to Coze
+        run: |
+          echo "Starting to trigger Coze workflow..."
+
+          curl -X POST "https://api.coze.cn/api/trigger/v1/webhook/biz_id/bot_platform/hook/1000000000720249346" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer SjupRayv" \
+            -d '{}'
+
+          echo "Trigger request sent successfully."
